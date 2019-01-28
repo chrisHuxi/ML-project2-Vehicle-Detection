@@ -64,6 +64,6 @@ In our implementation, the structure is shown as the following table:
 |Dense layer | size = {}|
 |output layer | output size = {}|
 
-Finally we can resize the output of NN into a 3D tensor: grid size * grid size*( class amount + anchor box amout*5 )
-
+Finally we can resize the output of NN into a 3D tensor: grid size * grid size* ( class amount + anchor box amout * 5 ), in our case: 15 * 15 * (10 + 2 * 5), shown as following ( source: deepsystem.io ): 
+![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/nn-output.PNG)
 
