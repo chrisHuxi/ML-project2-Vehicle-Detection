@@ -97,9 +97,9 @@ In details, we using HOG( Histogram of oriented gradient ) feature from HUV chan
 
 And here is an example:
 
-<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/car_notcar.png"/></div>
+<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/car-notcar.png"/></div>
 
-<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog_SVM.png"/></div>
+<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog-SVM.png"/></div>
 
 
 As we can see, an important step of detector with SVM is to use different size windows to slide, which actually needs many times classification for every single image, and it seriously reduces the detection efficiency. Besides, a huge disadvantage of this SVM-based detector is the poor generalization ability, which may be related to the features we choose.
