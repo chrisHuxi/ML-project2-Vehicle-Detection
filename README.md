@@ -31,8 +31,6 @@ Besides, there is also a label file of json, which we can use to find the ground
  
 In our actual training process, we found that many of the marked objects were too detailed, which caused that there are too many labels overlaped with each other, and it also has higher requirements to train network, so we preprocessed the dataset before training: for each category we only saved 5 objects with the largest bbox area.
  
-
-
 ## Method:
 The main idea is to use pre-trained neraul network called [YOLO network](https://pjreddie.com/darknet/yolo/) as the basic model, and we will try to retrain it in order to make it more suitable for our task. As a result, we will apply this detection model into images but also videos. And then we implement a traditional object detector based on SVM, in order to compare with YOLO.
 
@@ -48,6 +46,7 @@ We divided the whole project into 3 part: data process, training YOLO model, eva
 ## YOLO network
 YOLO's name comes from "you only look once", which exactly explained the mian idea of YOLO network: it reads in a image, predicts the area of the object in the image and also the category of object in this area, because it only needs to read in the image and go through the neural network at a time. the speed of detection processing could be very fast.
 
+### Architecture:
 Its architecture is as follows:
 ![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/YOLO-archi.png)
 
@@ -65,8 +64,17 @@ In our implementation, the structure is shown as the following table:
 |Dense layer | size = {}|
 |output layer | output size = {}|
 
-Finally we can resize the output of NN into a 3D tensor: grid size * grid size* ( class amount + anchor box amout * 5 ), in our case: 15 * 15 * (10 + 2 * 5), shown as following ( source: deepsystem.io ): 
+Finally we can resize the output of NN into a 3D tensor: grid size * grid size* ( class amount + anchor box amout * 5 ), in our case: 15 * 15 * (10 + 2 * 5), shown as following ( source: [deepsystem.io](https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&loop=false&delayms=3000&slide=id.g137784ab86_4_1509) ): 
+
 ![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/nn-output.PNG)
 
-The loss function is shown as follows:
+The loss function is shown as follows, in fact, the main idea is to convert object-detection into a regression problem:
+
 <div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/loss.png"/></div>
+
+### Training process
+During training process, we found that training such a large neural network is very time consuming, and the network is very easy to overfit. After trying many different methods, including image augumentation, adding dropout. Still overfitting:
+
+![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/overfiting.jpg)
+
+
