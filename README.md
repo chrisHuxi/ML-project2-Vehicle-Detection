@@ -3,7 +3,7 @@
 
 ## Overview:
 Vehicle detection is a important part of self-driving car technology. Usually in a self-driving car, camera is the most common sensor, from which if we can detect the vehicles around us, we can plan trajectory and avoid collisions. So in this project, we will implement a system, which the input is a image from a on-vehicle camera and the output looks like following:
-<div align=center><img width="700"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/figure_1.png"/></div>
+<div align=center><img width="800"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/figure-1.png"/></div>
 
 
 ## Dataset:
