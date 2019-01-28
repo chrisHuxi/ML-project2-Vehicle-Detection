@@ -76,7 +76,7 @@ The loss function is shown as follows, in fact, the main idea is to convert obje
 ### Training process
 During training process, we found that training such a large neural network is very time consuming, and the network is very easy to overfit. After trying many different methods, including image augumentation, adding dropout. Still overfitting:
 
-![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/overfiting.jpg)
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/overfiting.jpg"/></div>
 
 So we used the trained model: darknet provided by author, which got impressive results:
 
@@ -106,11 +106,23 @@ As we can see, an important step of detector with SVM is to use different size w
 
 Compare the classification on a clear images:
 
-from SVM detector:
+SVM detector:
+
 <div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/output-bboxes-svm.png"/></div>
 
 and YOLO detector:
 
+<div align=center><img width="550"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/test1_YOLO.jpg"/></div>
+
+YOLO can better dectect the vehicles even far away from the camera. Besides, when we take it to "dirty" but "real" images:
+
+SVM detector:
+
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/SVM-output.PNG"/></div>
+
+and YOLO detector:
+
+<div align=center><img width="550"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/predictions.jpg"/></div>
 
 
 
