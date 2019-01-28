@@ -5,6 +5,9 @@
 Vehicle detection is a important part of self-driving car technology. Usually in a self-driving car, camera is the most common sensor, from which if we can detect the vehicles around us, we can plan trajectory and avoid collisions. So in this project, we will implement a system, which the input is a image from a on-vehicle camera and the output looks like following:
 <div align=center><img width="800"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/figure-1.png"/></div>
 
+## Motivation:
+In this project, we used the YOLO network to detect vehicles. This is a different method comparing with traditional vehicle detection algorithm. In the latest version, the detection speed on the GPU can basically meet the real-time-detection's requirement. The YOLO network is so important and unique, so that we chose to implement it in this project, in order to learn the technical details of YOLO, and to practice our ability to implement and train neural networks.
+
 
 ## Dataset:
 In this project, we will use the [BDD100K dataset](https://bair.berkeley.edu/blog/2018/05/30/bdd/), which includes 100,000 images of size (1280 * 720) pixels.
@@ -25,10 +28,13 @@ Besides, there is also a label file of json, which we can use to find the ground
 ]
 ```
  According to [dataset info](https://github.com/ucbdrive/bdd-data): Box coordinates are integers measured from the top left image corner (and are 0-indexed). [x1, y1] is the top left corner of the bounding box and [x2, y2] the lower right. name is the video name that the frame is extracted from. It composes of two 8-character identifiers connected '-', such as c993615f-350c682c. Candidates for category are ['bus', 'traffic light', 'traffic sign', 'person', 'bike', 'truck', 'motor', 'car', 'train', 'rider']. In the current data, all the image timestamps are 1000. In our case, we will use only the attributes "bbox" and "category".
+ 
+In our actual training process, we found that many of the marked objects were too detailed, which caused that there are too many labels overlaped with each other, and it also has higher requirements to train network, so we preprocessed the dataset before training: for each category we only saved 5 objects with the largest bbox area.
+ 
 
 
 ## Method:
-The main idea is to use pre-trained neraul network called [YOLO network](https://pjreddie.com/darknet/yolo/) as the basic model, and we will try to retrain it in order to make it more suitable for our task. As a result, we will apply this detection model into images but also videos.
+The main idea is to use pre-trained neraul network called [YOLO network](https://pjreddie.com/darknet/yolo/) as the basic model, and we will try to retrain it in order to make it more suitable for our task. As a result, we will apply this detection model into images but also videos. And then we implement a traditional object detector based on SVM, in order to compare with YOLO.
 
 ## Plan:
 We divided the whole project into 3 part: data process, training YOLO model, evaluate the model and apply into videos.
@@ -38,3 +44,26 @@ We divided the whole project into 3 part: data process, training YOLO model, eva
 |Xi  | data process |
 |Martin | YOLO model |
 |Ziyuan | apply model|
+
+## YOLO network
+YOLO's name comes from "you only look once", which exactly explained the mian idea of YOLO network: it reads in a image, predicts the area of the object in the image and also the category of object in this area, because it only needs to read in the image and go through the neural network at a time. the speed of detection processing could be very fast.
+
+Its architecture is as follows:
+![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/YOLO-archi.png)
+
+
+In our implementation, the structure is shown as the following table:
+| Layer | Details |
+|:----:|:------:|
+|Inception model (first 20 layers)  | well pre-trianed layers, to extract features, output size = {6 * 6} |
+|Convolutional layers | filter size = {} |
+|Convolutional layers | filter size = {} |
+|Convolutional layers | filter size = {} |
+|Convolutional layers | filter size = {} |
+|Dense layer | size = {}|
+|Dense layer | size = {}|
+|output layer | output size = {}|
+
+Finally we can resize the output of NN into a 3D tensor: grid size * grid size*( class amount + anchor box amout*5 )
+
+
