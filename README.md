@@ -97,7 +97,7 @@ In details, we using HOG( Histogram of oriented gradient ) feature from HUV chan
 
 And here is an example:
 
-<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/car-notcar.png"/></div>
+<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/car_notcar.png"/></div>
 
 <div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog-SVM.png"/></div>
 
