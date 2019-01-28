@@ -53,13 +53,14 @@ Its architecture is as follows:
 
 
 In our implementation, the structure is shown as the following table:
+
 | Layer | Details |
 |:----:|:------:|
 |Inception model (first 20 layers)  | well pre-trianed layers, to extract features, output size = {6 * 6} |
-|Convolutional layers | filter size = {} |
-|Convolutional layers | filter size = {} |
-|Convolutional layers | filter size = {} |
-|Convolutional layers | filter size = {} |
+|Convolutional layer | filter size = {} |
+|Convolutional layer | filter size = {} |
+|Convolutional layer | filter size = {} |
+|Convolutional layer | filter size = {} |
 |Dense layer | size = {}|
 |Dense layer | size = {}|
 |output layer | output size = {}|
@@ -67,3 +68,5 @@ In our implementation, the structure is shown as the following table:
 Finally we can resize the output of NN into a 3D tensor: grid size * grid size* ( class amount + anchor box amout * 5 ), in our case: 15 * 15 * (10 + 2 * 5), shown as following ( source: deepsystem.io ): 
 ![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/nn-output.PNG)
 
+The loss function is shown as follows:
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/loss.png"/></div>
