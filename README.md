@@ -107,8 +107,7 @@ As we can see, an important step of detector with SVM is to use different size w
 Compare the classification on a clear images:
 
 from SVM detector:
-<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/
-output-bboxes-svm.png"/></div>
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/output-bboxes-svm.png"/></div>
 
 and YOLO detector:
 
