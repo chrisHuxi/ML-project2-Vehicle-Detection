@@ -13,7 +13,7 @@ In this project, we used the YOLO network to detect vehicles. This is a differen
 In this project, we will use the [BDD100K dataset](https://bair.berkeley.edu/blog/2018/05/30/bdd/), which includes 100,000 images of size (1280 * 720) pixels.
 Here is an example:
 
-![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/ac9be3fe-790d1f8e.jpg)
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/ac9be3fe-790d1f8e.jpg"/></div>
 
 Besides, there is also a label file of json, which we can use to find the ground truth detection-boxs' information:
 ```
@@ -48,6 +48,7 @@ YOLO's name comes from "you only look once", which exactly explained the mian id
 
 ### Architecture:
 Its architecture is as follows:
+
 ![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/YOLO-archi.png)
 
 
@@ -76,5 +77,46 @@ The loss function is shown as follows, in fact, the main idea is to convert obje
 During training process, we found that training such a large neural network is very time consuming, and the network is very easy to overfit. After trying many different methods, including image augumentation, adding dropout. Still overfitting:
 
 ![](https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/overfiting.jpg)
+
+So we used the trained model: darknet provided by author, which got impressive results:
+
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/predictions.jpg"/></div>
+
+### Compare with traditinal detection model
+Besides YOLO model, we got a traditinal detection model based on SVM. We use a [two-classes-dataset](http://www.gti.ssr.upm.es/data/Vehicle_database.html) to train SVM to classify {"car","non-car"}.
+The main workflow is shown as following:
+
+>1. extract feature and train svm model on training data.
+>2. pick test image and use windows of different sizes to slide.
+>3. resize this window-images and classify with well-trained SVM, label the "car" box.
+>4. reducing redundant box with non-maximum-suppression
+
+In details, we using HOG( Histogram of oriented gradient ) feature from HUV channels, which are highly frequently used by many image classification problem: 
+
+<div align=center><img width="800"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog.png"/></div>
+
+And here is an example:
+
+<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/car_notcar.png"/></div>
+
+<div align=center><img width="400"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog_SVM.png"/></div>
+
+
+As we can see, an important step of detector with SVM is to use different size windows to slide, which actually needs many times classification for every single image, and it seriously reduces the detection efficiency. Besides, a huge disadvantage of this SVM-based detector is the poor generalization ability, which may be related to the features we choose.
+
+Compare the classification on a clear images:
+
+from SVM detector:
+<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/
+output-bboxes-svm.png"/></div>
+
+and YOLO detector:
+
+
+
+
+
+
+
 
 
