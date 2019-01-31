@@ -91,7 +91,7 @@ So we used the trained model: darknet provided by author, which got impressive r
 
 <div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/predictions.jpg"/></div>
 
-### Compare with traditinal detection model
+### Compare with traditional detection model
 Besides YOLO model, we got a traditinal detection model based on SVM. We use a [two-classes-dataset](http://www.gti.ssr.upm.es/data/Vehicle_database.html) to train SVM to classify {"car","non-car"}.
 The main workflow is shown as following:
 
