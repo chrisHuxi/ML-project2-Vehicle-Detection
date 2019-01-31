@@ -1,0 +1,40 @@
+{
+  "model" : {
+      "input_size":   [448, 448, 3],
+      "grid_size":    15,
+      "bboxes_per_grid_cell": 2,
+      "bbox_params": 5,
+      "class_names":  ["bus", "traffic light", "traffic sign", "person", "bike", "truck", "motor", "car","train", "rider"],
+      "class_ids":    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "lambda_coord": 5,
+      "lambda_noobj": 0.5
+
+
+  },
+
+  "train":{
+    "train_images_folder":           "~/data/data/train",
+    "train_annotations_folder":      "~/data/labels/train_label",
+    "validation_dataset_ratio":      0.05,
+
+    "model_path":                    "trained_models/",
+
+
+    "image_format_extension":        ".jpg",
+    "annotations_format_extension":  ".txt",
+
+    "batch_size":           10,
+    "nb_epochs":            200,
+    "learning_rate":        1e-5,
+    "use_pretrained_model": false,
+    "model_name":           "model_11",
+    "steps_per_epoch":      1000
+  },
+
+  "predict":{
+    "model_path": "~/code/PracticalML2_project2/trained_models/model_15_grid_v3.hdf5",
+    "image_path": "~/data/data/train/209aed77-638da0c1.jpg",
+
+    "output": "~/code/PracticalML2_project2/results/~/code/209aed77-638da0c1.npy"
+  }
+}
