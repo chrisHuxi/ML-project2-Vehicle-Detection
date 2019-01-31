@@ -100,7 +100,7 @@ The main workflow is shown as following:
 >3. resize this window-images and classify with well-trained SVM, label the "car" box.
 >4. reducing redundant box with non-maximum-suppression
 
-In details, we using HOG( Histogram of oriented gradient ) feature from HUV channels, which are highly frequently used by many image classification problem: 
+In details, we using HOG( Histogram of oriented gradient ) feature from YUV channels, which are highly frequently used by many image classification problem: 
 
 <div align=center><img width="800"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog.png"/></div>
 
