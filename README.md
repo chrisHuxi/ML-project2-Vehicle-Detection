@@ -57,13 +57,12 @@ In our implementation, the structure is shown as the following table:
 | Layer | Details |
 |:----:|:------:|
 |Inception model (first 20 layers)  | well pre-trianed layers, to extract features, output size = {6 * 6} |
-|Convolutional layer | filter size = {} |
-|Convolutional layer | filter size = {} |
-|Convolutional layer | filter size = {} |
-|Convolutional layer | filter size = {} |
-|Dense layer | size = {}|
-|Dense layer | size = {}|
-|output layer | output size = {}|
+|Convolutional layer | filter size = {3x3x1024} |
+|Convolutional layer | filter size = {3x3x1024-s-2} |
+|Convolutional layer | filter size = {3x3x1024} |
+|Convolutional layer | filter size = {3x3x1024} |
+|Dense layer | size = {4096}|
+|Dense layer | size = {4500}|
 
 Finally we can resize the output of NN into a 3D tensor: grid size * grid size* ( class amount + anchor box amout * 5 ), in our case: 15 * 15 * (10 + 2 * 5), shown as following ( source: [deepsystem.io](https://docs.google.com/presentation/d/1aeRvtKG21KHdD5lg6Hgyhx5rPq_ZOsGjG5rJ1HP7BbA/pub?start=false&loop=false&delayms=3000&slide=id.g137784ab86_4_1509) ): 
 
@@ -76,13 +75,23 @@ The loss function is shown as follows, in fact, the main idea is to convert obje
 ### Training process
 During training process, we found that training such a large neural network is very time consuming, and the network is very easy to overfit. After trying many different methods, including image augumentation, adding dropout. Still overfitting:
 
-<div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/overfiting.jpg"/></div>
+<div align=center><img width="600"  src="/readme_img/model_1.png"/></div>
+Inception model with frozen weights. No image augumentation. Batch size 10. Steps_per_epoch 1000. Epochs 100. GPU: NVIDIA Tesla P4
+
+
+<div align=center><img width="600"  src="/readme_img/model_2.png"/></div>
+Inception model with all weights set to trainable. Image augumentation. Batch size 16. Steps_per_epoch 1000. Epochs 100. GPU: NVIDIA Tesla P100
+
+
+<div align=center><img width="600"  src="/readme_img/model_3.png"/></div>
+Inception model with all weights set to trainable. No Image augumentation. Batch size 16. Steps_per_epoch 1000. Epochs 100. GPU: NVIDIA Tesla V100
+
 
 So we used the trained model: darknet provided by author, which got impressive results:
 
 <div align=center><img width="600"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/predictions.jpg"/></div>
 
-### Compare with traditinal detection model
+### Compare with traditional detection model
 Besides YOLO model, we got a traditinal detection model based on SVM. We use a [two-classes-dataset](http://www.gti.ssr.upm.es/data/Vehicle_database.html) to train SVM to classify {"car","non-car"}.
 The main workflow is shown as following:
 
@@ -91,7 +100,7 @@ The main workflow is shown as following:
 >3. resize this window-images and classify with well-trained SVM, label the "car" box.
 >4. reducing redundant box with non-maximum-suppression
 
-In details, we using HOG( Histogram of oriented gradient ) feature from HUV channels, which are highly frequently used by many image classification problem: 
+In details, we using HOG( Histogram of oriented gradient ) feature from YUV channels, which are highly frequently used by many image classification problem: 
 
 <div align=center><img width="800"  src="https://github.com/chrisHuxi/ML-project2-Vehicle-Detection/blob/master/readme_img/hog.png"/></div>
 
